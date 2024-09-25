@@ -33,7 +33,23 @@ jobs:
 
       - name: Install packages & Build the action
         run: npm ci
-
+      
+      - name: Run tests
+        run: npm test:coverage
+      
+      - name: Upload coverage to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./coverage
+          destination_dir: coverage
+          keep_files: true
+      
+      - name: Upload test results
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-results
+          path: coverage/  
       # -------- THIS ACTION --------
       - name: Purge caches
         uses: ./.
