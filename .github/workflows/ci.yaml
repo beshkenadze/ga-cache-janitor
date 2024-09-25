@@ -12,32 +12,31 @@ jobs:
   build:
     name: Build and test the action
     runs-on: ubuntu-latest
-    permissions:
-      contents: write
-      actions: write
+    strategy:
+      matrix:
+        node-version: [16.x, 18.x]
     steps:
       - uses: actions/checkout@v3
 
-      # http://man7.org/linux/man-pages/man1/date.1.html
-      - name: Get Date
-        id: get-date
-        run: |
-          echo "date=$(/bin/date -u "+date-%Y-%m-%d-time-%H-%M-%S")" >> $GITHUB_OUTPUT
-        shell: bash
+      - uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
 
+      # Cache NPM dependencies
       - uses: actions/cache@v3
         with:
           path: |
             ~/.npm
-          key: ${{ runner.os }}-npm-${{ hashFiles('**/package-lock.json', 'package.json') }}-${{ steps.get-date.outputs.date }}
+          key: ${{ runner.os }}-npm-${{ hashFiles('**/package-lock.json', 'package.json') }}
           restore-keys: |
-            ${{ runner.os }}-npm-${{ hashFiles('**/package-lock.json', 'package.json') }}-
+            ${{ runner.os }}-npm-
 
+      # Install dependencies and build the action
       - name: Install packages & Build the action
         run: npm ci
-      
-      - name: Run tests
-        run: npm test:coverage
+
+      - name: Run tests with coverage
+        run: npm run test:coverage
       
       - name: Upload coverage to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
@@ -51,24 +50,26 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: test-results
-          path: coverage/  
-      # -------- THIS ACTION --------
+          path: coverage/
+      
+      # Custom cache purge action
       - name: Purge caches
         uses: ./.
         with:
           debug: true
           created: true
           accessed: true
-          # 3 days
           max-age: 259200
-      # -------- THIS ACTION --------
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Commit & Push changes
         if: github.event_name == 'push'
         run: |
-          git config --global user.name github-actions
-          git config --global user.email github-actions@github.com
-          git rebase origin/master
+          git config user.name "${{ github.actor }}"
+          git config user.email "${{ github.actor }}@users.noreply.github.com"
+          git fetch --unshallow
+          git checkout master
           git add dist
-          git commit -m "action: build the action" || echo ""
+          git commit -m "action: build the action" || echo "No changes to commit"
           git push

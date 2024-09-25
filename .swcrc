@@ -1,0 +1,28 @@
+{
+  "jsc": {
+    "parser": {
+      "syntax": "typescript",
+      "tsx": false,
+      "decorators": false,
+      "dynamicImport": false
+    },
+    "target": "es2018",
+    "loose": false,
+    "externalHelpers": false,
+    "keepClassNames": true,
+    "transform": {
+      "legacyDecorator": false,
+      "decoratorMetadata": false
+    }
+  },
+  "module": {
+    "type": "commonjs",
+    "strict": true,
+    "strictMode": true,
+    "lazy": false,
+    "noInterop": false
+  },
+  "minify": false,
+  "isModule": true,
+  "sourceMaps": true
+}
