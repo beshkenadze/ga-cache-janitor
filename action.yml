@@ -2,12 +2,16 @@ name: "Purge cache"
 description: Purge GitHub Actions cache
 inputs:
   debug:
-    description: 'Output debug info'
+    description: "Output debug info"
     default: "false"
   max-age:
-    description: 'Delete all caches older than this value in seconds'
+    description: 'Delete all caches older than this value. Accepts human-readable format (e.g., "7d", "1w", "2M").'
     required: true
-    default: "604800"
+    default: "7d"
+  max-total-size:
+    description: 'Maximum total size of caches. Accepts human-readable format (e.g., "1GB", "500MB", "10TB").'
+    required: false
+    default: "10GB"
   accessed:
     description: 'When "true", delete caches by "last accessed" time'
     required: false
@@ -20,8 +24,8 @@ inputs:
     description: Used to communicate with GitHub API. Since there's a default, this is typically not supplied by the user.
     default: ${{ github.token }}
 runs:
-  using: 'node20'
-  main: 'dist/index.js'
+  using: "node20"
+  main: "dist/index.js"
 branding:
-  icon: 'database'
-  color: 'purple'
+  icon: "database"
+  color: "purple"

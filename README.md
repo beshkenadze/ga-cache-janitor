@@ -9,11 +9,12 @@ See [action.yml](action.yml)
 ```yaml
 steps:
 # Do other steps like checkout, install, compile, etc.
-- uses: MyAlbum/purge-cache@v2
+- uses: beshkenadze/purge-cache@v2
   with:
     accessed: true # Purge caches by their last accessed time (default)
     created: false # Purge caches by their created time (default)
-    max-age: 604800 # Leave only caches accessed in the last 7 days (default)
+    max-age: "7d" # Leave only caches accessed in the last 7 days (default)
+    max-total-size: "10GB" # Maximum total size of caches (default)
 ```
 
 ## Example workflow
@@ -33,7 +34,7 @@ Output debug data (defaults to `false`)
 ```yaml
 steps:
 # Do other steps like checkout, install, compile, etc.
-- uses: MyAlbum/purge-cache@v2
+- uses: beshkenadze/purge-cache@v2
   with:
     debug: true # Set to true to output debug info
 ```
@@ -51,7 +52,7 @@ needs to be available for the token.
 ```yaml
 steps:
 # Do other steps like checkout, install, compile, etc.
-- uses: MyAlbum/purge-cache@v2
+- uses: beshkenadze/purge-cache@v2
   with:
     token: $GITHUBTOKEN # Set a GitHub token
 ```
