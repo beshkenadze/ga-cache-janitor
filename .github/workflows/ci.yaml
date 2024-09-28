@@ -86,7 +86,7 @@ jobs:
           git config user.name "${{ github.actor }}"
           git config user.email "${{ github.actor }}@users.noreply.github.com"
           git fetch --unshallow
-          git checkout master
+          git checkout main
           git add dist
           git commit -m "action: build the action" || echo "No changes to commit"
           git push
