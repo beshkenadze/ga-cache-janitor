@@ -75,7 +75,7 @@ jobs:
           debug: true
           created: true
           accessed: true
-          max-age: 259200
+          max-age: 7d
           max-total-size: 5GB
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
