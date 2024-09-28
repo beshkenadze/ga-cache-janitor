@@ -3,13 +3,16 @@
   "version": "3.0.0",
   "description": "",
   "type": "module",
-  "main": "dist/esm/index.mjs",
+  "main": "dist/index.js",
+  "module": "dist/index.cjs",
+  "exports": {
+    ".": {
+      "require": "./dist/index.cjs"
+    }
+  },
   "scripts": {
-    "build:ncc": "npm run type-check && ncc build -o dist/ src/index.ts",
-    "build:swc": "npm run type-check && swc src/index.ts -d dist --strip-leading-paths --out-file-extension mjs",
-    "build:mjs": "swc src -d dist/esm --config-file .swcrc.mjs.json --strip-leading-paths --out-file-extension mjs",
-    "build:cjs": "swc src -d dist/cjs --config-file .swcrc.cjs.json --strip-leading-paths --out-file-extension cjs",
-    "build": "npm run type-check && npm run build:mjs && npm run build:cjs",
+    "build:ncc": "ncc build -o dist/ src/index.ts",
+    "build": "npm run type-check && npm run build:ncc",
     "type-check": "tsc --noEmit",
     "test": "vitest run --pool=threads",
     "test:watch": "vitest --watch",
