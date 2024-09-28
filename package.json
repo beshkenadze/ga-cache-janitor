@@ -11,7 +11,7 @@
     "build:cjs": "swc src -d dist/cjs --config-file .swcrc.cjs.json --strip-leading-paths --out-file-extension cjs",
     "build": "npm run type-check && npm run build:mjs && npm run build:cjs",
     "type-check": "tsc --noEmit",
-    "test": "vitest run --threads",
+    "test": "vitest run --pool=threads",
     "test:watch": "vitest --watch",
     "test:coverage": "vitest run --coverage --reporter=html"
   },
