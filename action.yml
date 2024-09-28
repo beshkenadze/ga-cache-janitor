@@ -1,27 +1,29 @@
-name: "Purge cache"
-description: Purge GitHub Actions cache
+name: "Cache Janitor"
+description: "Automatically purges GitHub Actions caches based on specified age and size limits to optimize workflow performance."
 inputs:
   debug:
-    description: "Output debug info"
+    description: "Set to 'true' to enable detailed debug output during action execution."
+    required: false
     default: "false"
   max-age:
-    description: 'Delete all caches older than this value. Accepts human-readable format (e.g., "7d", "1w", "2M").'
-    required: true
+    description: 'Delete caches older than this value. Accepts formats like "7d", "1w", "2M".'
+    required: false
     default: "7d"
   max-total-size:
-    description: 'Maximum total size of caches. Accepts human-readable format (e.g., "1GB", "500MB", "10TB").'
+    description: 'Maximum total size of caches to retain. Accepts formats like "1GB", "500MB", "10TB".'
     required: false
     default: "10GB"
   accessed:
-    description: 'When "true", delete caches by "last accessed" time'
+    description: 'Set to "true" to delete caches based on their last accessed time.'
     required: false
     default: "true"
   created:
-    description: 'When "true", delete caches by "created" time'
+    description: 'Set to "true" to delete caches based on their creation time.'
     required: false
     default: "false"
   token:
-    description: Used to communicate with GitHub API. Since there's a default, this is typically not supplied by the user.
+    description: "Used to communicate with the GitHub API. Typically not supplied by the user."
+    required: false
     default: ${{ github.token }}
 runs:
   using: "node20"
