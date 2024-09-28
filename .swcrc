@@ -16,7 +16,7 @@
     }
   },
   "module": {
-    "type": "commonjs",
+    "type": "es6",
     "strict": true,
     "strictMode": true,
     "lazy": false,
@@ -24,5 +24,6 @@
   },
   "minify": false,
   "isModule": true,
-  "sourceMaps": true
+  "sourceMaps": true,
+  "exclude": [".*\\.spec\\.ts$", ".*\\.spec\\.js$"]
 }

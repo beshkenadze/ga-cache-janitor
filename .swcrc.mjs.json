@@ -1,0 +1,20 @@
+{
+  "jsc": {
+    "parser": {
+      "syntax": "typescript",
+      "tsx": false,
+      "decorators": false,
+      "dynamicImport": false
+    },
+    "target": "es2018"
+  },
+  "module": {
+    "type": "es6"
+  },
+  "isModule": true,
+  "sourceMaps": true,
+  "exclude": [
+    ".*\\.spec\\.ts$",
+    ".*\\.spec\\.js$"
+  ]
+}
