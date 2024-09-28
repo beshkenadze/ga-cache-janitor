@@ -31,8 +31,8 @@ jobs:
       - name: Build project
         run: |
           npm ci
-          npm run test
           npm run build
+          npm run test
 
       - name: Zip Release
         run: zip -r release.zip dist
