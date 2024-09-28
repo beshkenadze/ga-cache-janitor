@@ -23,13 +23,24 @@ jobs:
           node-version: ${{ matrix.node-version }}
 
       # Cache NPM dependencies
-      - uses: actions/cache@v3
+      - name: Cache npm dependencies
+        uses: actions/cache@v3
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
+      # Cache build outputs
+      - name: Cache build outputs
+        uses: actions/cache@v3
         with:
           path: |
-            ~/.npm
-          key: ${{ runner.os }}-npm-${{ hashFiles('**/package-lock.json', 'package.json') }}
+            dist
+            coverage
+          key: ${{ runner.os }}-build-${{ github.sha }}
           restore-keys: |
-            ${{ runner.os }}-npm-
+            ${{ runner.os }}-build-
 
       # Install dependencies and build the action
       - name: Install packages & Build the action
@@ -59,12 +70,13 @@ jobs:
       
       # Custom cache purge action
       - name: Purge caches
-        uses: ./dist/cjs/index.cjs
+        uses: ./.
         with:
           debug: true
           created: true
           accessed: true
           max-age: 259200
+          max-total-size: 5GB
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
