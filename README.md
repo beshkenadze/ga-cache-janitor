@@ -55,7 +55,7 @@ jobs:
   cache-cleanup:
     runs-on: ubuntu-latest
     steps:
-      - uses: beshkenadze/cache-janitor@v3
+      - uses: beshkenadze/ga-cache-janitor@v3
 ```
 
 This basic setup uses default values to purge caches older than 7 days and maintain a total cache size under 10GB.
@@ -73,7 +73,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Purge Old Caches
-        uses: beshkenadze/cache-janitor@v3
+        uses: beshkenadze/ga-cache-janitor@v3
         with:
           debug: 'true'
           max-age: '14d'
@@ -105,7 +105,7 @@ The action evaluates caches based on the following criteria:
 If you encounter issues or want more insight into the cache purging process, set the `debug` input to `'true'`:
 
 ```yaml
-- uses: beshkenadze/cache-janitor@v3
+- uses: beshkenadze/ga-cache-janitor@v3
   with:
     debug: 'true'
 ```
