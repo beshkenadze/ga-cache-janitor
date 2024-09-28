@@ -3,11 +3,14 @@
   "version": "2.0.0",
   "description": "",
   "type": "module",
-  "main": "lib/index.js",
+  "main": "dist/esm/index.mjs",
   "scripts": {
-    "build": "npm run type-check && swc src -d lib && ncc build -o lib/ src/index.ts",
+    "build:ncc": "npm run type-check && ncc build -o dist/ src/index.ts",
+    "build:swc": "npm run type-check && swc src/index.ts -d dist --strip-leading-paths --out-file-extension mjs",
+    "build:mjs": "swc src -d dist/esm --config-file .swcrc.mjs.json --strip-leading-paths --out-file-extension mjs",
+    "build:cjs": "swc src -d dist/cjs --config-file .swcrc.cjs.json --strip-leading-paths --out-file-extension cjs",
+    "build": "npm run type-check && npm run build:mjs && npm run build:cjs",
     "type-check": "tsc --noEmit",
-    "postinstall": "npm run build",
     "test": "vitest run --threads",
     "test:watch": "vitest --watch",
     "test:coverage": "vitest run --coverage --reporter=html"
