@@ -1,7 +1,7 @@
 {
-  "name": "purge-cache",
+  "name": "ga-cache-janitor",
   "version": "3.0.0",
-  "description": "",
+  "description": "Automatically purges GitHub Actions caches based on specified age and size limits to optimize workflow performance.",
   "type": "module",
   "main": "dist/index.js",
   "module": "dist/index.cjs",
@@ -22,8 +22,16 @@
     "type": "git",
     "url": "git+https://github.com/beshkenadze/purge-cache.git"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": [
+    "github",
+    "actions",
+    "cache",
+    "purge",
+    "janitor",
+    "workflow",
+    "performance"
+  ],
+  "author": "Aleksandr Beshkenadze",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/beshkenadze/purge-cache/issues"
