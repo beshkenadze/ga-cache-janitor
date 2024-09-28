@@ -2,7 +2,7 @@
   "name": "ga-cache-janitor",
   "version": "3.0.0",
   "description": "Automatically purges GitHub Actions caches based on specified age and size limits to optimize workflow performance.",
-  "type": "module",
+  "type": "commonjs",
   "main": "dist/index.js",
   "module": "dist/index.cjs",
   "exports": {

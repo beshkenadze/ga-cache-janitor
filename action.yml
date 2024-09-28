@@ -27,7 +27,7 @@ inputs:
     default: ${{ github.token }}
 runs:
   using: "node20"
-  main: "dist/cjs/index.cjs"
+  main: "dist/index.js"
 branding:
   icon: "database"
   color: "purple"
