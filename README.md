@@ -55,7 +55,7 @@ jobs:
   cache-cleanup:
     runs-on: ubuntu-latest
     steps:
-      - uses: your-username/cache-janitor@v1
+      - uses: beshkenadze/cache-janitor@v3
 ```
 
 This basic setup uses default values to purge caches older than 7 days and maintain a total cache size under 10GB.
@@ -73,7 +73,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Purge Old Caches
-        uses: your-username/cache-janitor@v1
+        uses: beshkenadze/cache-janitor@v3
         with:
           debug: 'true'
           max-age: '14d'
